@@ -45,7 +45,7 @@
 			cfg.servers
 		)))
 		else ""));
-		gate-minecraft = (pkgs.callPackage ./gate.nix {});
+		gate-minecraft = pkgs.gate-minecraft;
 		config-file = pkgs.writeText "gate-config.yml" makeConfig;
 	in lib.mkIf cfg.enable {
 		systemd.services.gate-minecraft = {

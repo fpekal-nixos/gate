@@ -4,7 +4,7 @@
 	};
 
 	outputs =
-	{ nixpkgs, ... }:
+	{ self, nixpkgs, ... }:
 	let
 		system = "x86_64-linux";
 		pkgs = nixpkgs.legacyPackages.${system};
@@ -13,5 +13,9 @@
 		packages.${system}.default = pkgs.callPackage ./gate.nix {};
 
 		nixosModules.default = import ./gate-service.nix;
+
+		overlays.default = final: prev: {
+			gate-minecraft = self.packages.${system}.default;
+		};
 	};
 }
