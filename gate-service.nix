@@ -11,7 +11,7 @@
 
 		servers = lib.mkOption {
 			description = "List of minecraft servers to forward";
-			example = [ { host = "server.example.com"; backend = "localhost:25566";} ];
+			example = [ { host = "'server.example.com'"; backend = "localhost:25566";} ];
 			default = [];
 			type = lib.types.listOf lib.types.anything;
 		};
@@ -39,7 +39,7 @@
 		(builtins.concatStringsSep "\n" (
 			builtins.map (
 				{ host, backend }:
-				"      - host: '" + host + "'\n" +
+				"      - host: " + host + "\n" +
 				"        backend: " + backend + "\n"
 			)
 			cfg.servers
